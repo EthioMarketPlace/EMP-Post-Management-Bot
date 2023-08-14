@@ -90,7 +90,7 @@ class EMPBot {
     message: string,
     keyboard: Markup.Markup<InlineKeyboardMarkup>
   ) {
-    const messageCtx = this.ctx.message;
+    const messageCtx = this.ctx.message || this.ctx.callbackQuery?.message;
     const msgId = messageCtx?.message_id! + 1; //the edited message will be = userMsg_id + 1
     const chatId = messageCtx?.chat.id;
 
