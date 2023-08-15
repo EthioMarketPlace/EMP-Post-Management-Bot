@@ -3,6 +3,7 @@ import connectDB from "./utils/db.js";
 import { BOT_TOKEN } from "./utils/dotenv.js";
 import EMPBot from "./commands/start.js";
 import LanguageHandler from "./commands/language.js";
+import SellProductHandler from "./commands/sellProduct.js";
 
 connectDB();
 
@@ -31,6 +32,12 @@ bot.action(["Oromo", "Amhara", "English"], (ctx) => {
 bot.action("home", (ctx) => {
   const ethioBot = new EMPBot(ctx);
   ethioBot.start();
+});
+
+//product categories
+bot.action("sell", async (ctx) => {
+  const sellProductHandler = new SellProductHandler(ctx);
+  await sellProductHandler.listCategories();
 });
 
 bot.launch();

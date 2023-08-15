@@ -1,6 +1,7 @@
 import { Context, Markup } from "telegraf";
 import makeAPICall from "../utils/api.js";
 import { InlineKeyboardMarkup } from "telegraf/types";
+import cache from "../utils/cache.js";
 
 interface APIResponse {
   last_post_id: number;
@@ -14,7 +15,7 @@ class EMPBot {
       // debugger;
       const inlineKeyboard = this.generateInlineKeyboard();
       await this.sendWelcomeMessage(
-        "Welcome to the Ethio Marketplace (EMP) Bot!\n\n<b><i>Loading ...</i></b> ",
+        "Welcome to the Ethio Marketplace (EMP) Bot!\n\n<b><i>Loading ...  50%  ...</i></b> ",
         inlineKeyboard
       );
 
@@ -27,47 +28,65 @@ class EMPBot {
   }
 
   private async generateWelcomeMessage(): Promise<string> {
-    const posts = await this.fetchLatestPosts();
+    const posts = await this.fetchLatestPost();
     return `Welcome to the Ethio Marketplace (EMP) Bot!\n\n${posts}`;
   }
 
   private generateInlineKeyboard() {
     return Markup.inlineKeyboard([
       [
-        Markup.button.callback("Add Channel", "addChannel"),
-        Markup.button.callback("Sell Product", "sellProduct"),
+        Markup.button.callback("📢 Add Channel", "addChannel"),
+        Markup.button.callback("💰 Sell Product", "sell"),
       ],
-      [Markup.button.callback("Explore EMP Channels", "exploreChannels")],
+      [Markup.button.callback("🔍 Explore EMP Channels", "exploreChannels")],
       [
         Markup.button.callback(
-          "EMP [ Instagram ] or [ Facebook ]",
+          "🌐 EMP [ Instagram ] or [ Facebook ]",
           "empsocial"
         ),
       ],
       [
-        Markup.button.callback("Language", "language"),
-        Markup.button.callback("About", "about"),
-        Markup.button.callback("Contact Us", "contactUs"),
+        Markup.button.callback("🗣️ Language", "language"),
+        Markup.button.callback("ℹ️ About", "about"),
+        Markup.button.callback("📞 Contact Us", "contactUs"),
       ],
     ]);
   }
 
-  private async fetchLatestPosts(): Promise<string> {
-    // debugger;
+  private async fetchLatestPost() {
+    const postIdFromCache = this.retrivePostIdfromCache();
     const randomCategory = this.selectRandomCategory();
-    try {
-      const responseData: APIResponse = JSON.parse(
-        await makeAPICall(randomCategory)
-      );
-      // const responseData: APIResponse = await ax_makeAPICall(randomCategory);
+    let lastPostId;
 
-      const lastPostId = responseData.last_post_id;
-      const channelLink = `https://t.me/${randomCategory}/`;
-      return `${channelLink}${lastPostId}\n`;
-    } catch (error) {
-      console.error("Error fetching latest posts:", error);
-      throw error; // Rethrow the error to be caught in the start() method
+    if (postIdFromCache) {
+      lastPostId = postIdFromCache;
+    } else {
+      try {
+        const responseData: APIResponse = JSON.parse(
+          await makeAPICall(randomCategory)
+        );
+
+        lastPostId = responseData.last_post_id;
+        this.saveLatestPostIdToCache(lastPostId);
+      } catch (error) {
+        console.error("Error fetching latest posts:", error);
+        throw error; // Rethrow the error to be caught in the start() method
+      }
     }
+    const channelLink = `https://t.me/${randomCategory}/`;
+    return `${channelLink}${lastPostId}\n`;
+  }
+
+  private retrivePostIdfromCache() {
+    const cacheKey = "latest_post_id";
+    const finder = cache.get(cacheKey);
+    return finder;
+  }
+
+  private saveLatestPostIdToCache(postid: number) {
+    const cacheKey = "latest_post_id";
+    const ttl = 24 * 60 * 60; // 1 day in seconds
+    cache.set(cacheKey, postid, ttl);
   }
 
   private selectRandomCategory(): string {

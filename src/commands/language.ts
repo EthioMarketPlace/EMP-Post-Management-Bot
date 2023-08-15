@@ -9,9 +9,9 @@ class LanguageHandler {
   private languageOptions() {
     return Markup.inlineKeyboard([
       [
-        Markup.button.callback("English", "English"),
-        Markup.button.callback("Oromo", "Oromo"),
-        Markup.button.callback("Amhara", "Amhara"),
+        Markup.button.callback("🇺🇸 English", "English"),
+        Markup.button.callback("🇪🇹 Oromo", "Oromo"),
+        Markup.button.callback("🇪🇹 Amhara", "Amhara"),
       ],
       [Markup.button.callback("🏡 Go To Home", "home")],
     ]);
