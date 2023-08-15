@@ -13,7 +13,7 @@ const bot = new Telegraf(BOT_TOKEN || "");
 // starting bot
 bot.start((ctx) => {
   const ethioBot = new EMPBot(ctx);
-  ethioBot.start();
+  ethioBot.start("start");
 });
 
 //to langauge selection
@@ -31,7 +31,7 @@ bot.action(["Oromo", "Amhara", "English"], (ctx) => {
 //returning home
 bot.action("home", (ctx) => {
   const ethioBot = new EMPBot(ctx);
-  ethioBot.start();
+  ethioBot.start("home");
 });
 
 //product categories

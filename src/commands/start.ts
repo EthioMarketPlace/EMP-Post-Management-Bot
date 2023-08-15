@@ -10,17 +10,18 @@ interface APIResponse {
 class EMPBot {
   constructor(private ctx: Context) {}
 
-  async start() {
+  async start(to: string) {
     try {
       // debugger;
       const inlineKeyboard = this.generateInlineKeyboard();
       await this.sendWelcomeMessage(
         "Welcome to the Ethio Marketplace (EMP) Bot!\n\n<b><i>Loading ...  50%  ...</i></b> ",
-        inlineKeyboard
+        inlineKeyboard,
+        to
       );
 
       const welcomeMessage = await this.generateWelcomeMessage();
-      await this.sendLatestPost(welcomeMessage, inlineKeyboard);
+      await this.sendLatestPost(welcomeMessage, inlineKeyboard, to);
     } catch (error) {
       console.error("Error:", error);
       // Handle the error, maybe send an error message to the user
@@ -97,20 +98,29 @@ class EMPBot {
 
   private async sendWelcomeMessage(
     message: string,
-    keyboard: Markup.Markup<InlineKeyboardMarkup>
+    keyboard: Markup.Markup<InlineKeyboardMarkup>,
+    to: string
   ) {
-    await this.ctx.reply(message, {
-      reply_markup: keyboard.reply_markup,
-      parse_mode: "HTML",
-    });
+    if (to === "start")
+      await this.ctx.reply(message, {
+        reply_markup: keyboard.reply_markup,
+        parse_mode: "HTML",
+      });
+    else
+      await this.ctx.editMessageText(message, {
+        reply_markup: keyboard.reply_markup,
+        parse_mode: "HTML",
+      });
   }
 
   private async sendLatestPost(
     message: string,
-    keyboard: Markup.Markup<InlineKeyboardMarkup>
+    keyboard: Markup.Markup<InlineKeyboardMarkup>,
+    to: string
   ) {
     const messageCtx = this.ctx.message || this.ctx.callbackQuery?.message;
-    const msgId = messageCtx?.message_id! + 1; //the edited message will be = userMsg_id + 1
+    const msgId =
+      to === "start" ? messageCtx?.message_id! + 1 : messageCtx?.message_id!; //the edited message will be = userMsg_id + 1
     const chatId = messageCtx?.chat.id;
 
     await this.ctx.telegram.editMessageText(chatId, msgId, undefined, message, {
