@@ -20,7 +20,7 @@ class LanguageHandler {
   async showLanguageOptions() {
     const keyboard = this.languageOptions();
 
-    await this.ctx.reply(
+    await this.ctx.editMessageText(
       "<b>Select your language:\n\n✅ Selected :</b> <code>English</code>",
       { reply_markup: keyboard.reply_markup, parse_mode: "HTML" }
     );

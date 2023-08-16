@@ -4,6 +4,8 @@ import { BOT_TOKEN } from "./utils/dotenv.js";
 import EMPBot from "./commands/start.js";
 import LanguageHandler from "./commands/language.js";
 import SellProductHandler from "./commands/sellProduct.js";
+import Channels from "./commands/exploreChannels.js";
+import About from "./commands/about.js";
 
 connectDB();
 
@@ -37,7 +39,18 @@ bot.action("home", (ctx) => {
 //product categories
 bot.action("sell", async (ctx) => {
   const sellProductHandler = new SellProductHandler(ctx);
-  await sellProductHandler.listCategories();
+  sellProductHandler.listCategories();
+});
+
+//List EMP All Channels
+bot.action("exploreChannels", (ctx) => {
+  const channels = new Channels(ctx);
+  channels.list();
+});
+
+bot.action("about", (ctx) => {
+  const about = new About(ctx);
+  about.display();
 });
 
 bot.launch();
