@@ -6,6 +6,8 @@ import LanguageHandler from "./commands/language.js";
 import SellProductHandler from "./commands/sellProduct.js";
 import Channels from "./commands/exploreChannels.js";
 import About from "./commands/about.js";
+import ContactUs from "./commands/emp.js";
+import EMP from "./commands/emp.js";
 
 connectDB();
 
@@ -48,9 +50,15 @@ bot.action("exploreChannels", (ctx) => {
   channels.list();
 });
 
-bot.action("about", (ctx) => {
-  const about = new About(ctx);
-  about.display();
+//about section
+bot.action(["about", "contactUs", "empsocial"], (ctx) => {
+  const emp = new EMP(ctx);
+  emp.display();
+});
+
+//Global Error handler
+bot.catch((err) => {
+  console.log(err);
 });
 
 bot.launch();

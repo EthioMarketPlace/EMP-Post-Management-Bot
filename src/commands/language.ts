@@ -1,6 +1,6 @@
 import { Context, Markup } from "telegraf";
 import cache from "../utils/cache.js";
-import { CustomCallbackQuery } from "../interfaces/langauge.js";
+import { CustomCallbackQuery } from "../interfaces/cbkQuery.js";
 import updateLanguageWithRetry from "../utils/updatelanguagewithretries.js";
 
 class LanguageHandler {
