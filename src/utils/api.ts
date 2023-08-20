@@ -6,7 +6,6 @@ function makeAPICall(path: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: API,
-      //   port: 80,
       path: "/api/v2/getlastpost_id/" + path,
       method: "GET",
     };

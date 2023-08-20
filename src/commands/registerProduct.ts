@@ -6,72 +6,111 @@ import {
   CustomTextMessage,
 } from "../interfaces/cbkQuery.js";
 import cache from "../utils/cache.js";
+import EMPBot from "./start.js";
 
 class Register {
   constructor(private ctx: Context) {}
 
-  category() {
-    // - user clicks on one of category list Inline keyboards
-    // - create temporary cache `“id_d”:{….}` for `1 hr’s`
-    // - save `category:?, state=title`
-    // - send a message ask for `title`
-
+  async category() {
     const cbkQuery = this.ctx.callbackQuery! as CustomCallbackQuery;
     const chatId = this.ctx.chat?.id!;
     const input = cbkQuery?.data;
     this.createTemporaryCache(chatId, input);
+
+    await this.ctx.reply("Type title for your product");
   }
 
   private createTemporaryCache(chatId: number, category: string) {
     const data = { category: category, state: "title" };
-    cache.set(`${chatId}_d`, data, 3600);//1 hour
+    cache.set(`${chatId}_d`, data, 3600); //1 hour
   }
 
-  private updateTemporaryCache(cached:any, chatId:number, state:string, input:string|number){
-    const newState = (state === "title")?"description":(state === "description")?"price":(state === "price")?"contact":"image";
-    cached.state = newState; 
+  private nextState(state: string) {
+    return state === "title"
+      ? "description"
+      : state === "description"
+      ? "price"
+      : state === "price"
+      ? "contact"
+      : "image";
+  }
+
+  private updateTemporaryCache(
+    cached: any,
+    state: string,
+    input: string | number,
+    newState: string
+  ) {
+    const chatId = this.ctx.chat?.id;
+
+    cached.state = newState;
     cached[state] = input;
-    
-    cache.set(`${chatId}_d`, cached, 3600)
+
+    cache.set(`${chatId}_d`, cached, 3600);
+    console.log(cached);
   }
 
-  private async progress() {
-    // - on receive Input, access state value which is title,
-    // - `title:Input`, update `state: description`, update cache
-    // - send a message asking for `description` & /title → back to title
-
+  private async getState() {
     const chatId = this.ctx.chat?.id;
     const cached: { state: string } = cache.get(`${chatId}_d`)!;
-
-    if (cached) {
-      const state = cached?.state;
-      const input =
-        state === "title" || state === "description" || state === "price"
-          ? this.inputText()
-          : state === "contact"
-          ? this.inputContact()
-          : this.inputImage();
-
-      this.updateTemporaryCache(cached,chatId!,state,input!)
-    }
+    if (!cached) return await new EMPBot(this.ctx).start("home");
+    return cached;
   }
 
-  private async sendMessage(state:string){
-    await this.ctx.reply(state)
+  private getInput(state: string) {
+    return state === "title" || state === "description" || state === "price"
+      ? this.inputText()
+      : state === "contact"
+      ? this.inputContact()
+      : state === "image"
+      ? this.inputImage()
+      : null;
+  }
+
+  async sendMessage() {
+    const cache = (await this.getState()) as { state: string };
+    const state = cache.state;
+    const input = this.getInput(state) as string | number;
+    const nextState = this.nextState(state);
+
+    if (!nextState || !input) {
+      await this.ctx.reply(state);
+      return;
+    }
+
+    if (state === "price" && !Number(input)) {
+      await this.ctx.reply(state);
+      return;
+    }
+
+    if (state === "contact" && input === null) {
+      await this.ctx.reply(state);
+      return;
+    }
+
+    if (state === "image" && input === null) {
+      await this.ctx.reply(state);
+      return;
+    }
+
+    this.updateTemporaryCache(cache, state, input, nextState);
+    await this.ctx.reply(nextState);
   }
 
   private inputContact() {
     const message = this.ctx.message! as CustomContactMessage;
-    return message.contact;
+    return message && message.contact ? message.contact : null;
   }
 
   private inputText() {
     const message = this.ctx.message! as CustomTextMessage;
-    return message.text;
+    return message && message.text ? message.text : null;
   }
 
   private inputImage() {
     const message = this.ctx.message! as CustomImageMessage;
-    return message.photo[0];
+    return message && message.photo ? message.photo[0] : null;
   }
 }
+
+export default Register;

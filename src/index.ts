@@ -8,6 +8,7 @@ import Channels from "./commands/exploreChannels.js";
 import About from "./commands/about.js";
 import ContactUs from "./commands/emp.js";
 import EMP from "./commands/emp.js";
+import Register from "./commands/registerProduct.js";
 
 connectDB();
 
@@ -54,6 +55,19 @@ bot.action("exploreChannels", (ctx) => {
 bot.action(["about", "contactUs", "empsocial"], (ctx) => {
   const emp = new EMP(ctx);
   emp.display();
+});
+
+bot.action(
+  ["shoes", "cars", "arts", "electronics", "cosmetics", "clothes", "houses"],
+  (ctx) => {
+    const register = new Register(ctx);
+    register.category();
+  }
+);
+
+bot.on("message", (ctx) => {
+  const register = new Register(ctx);
+  register.sendMessage();
 });
 
 //Global Error handler
