@@ -5,12 +5,23 @@ import EMPBot from "./commands/start.js";
 import LanguageHandler from "./commands/language.js";
 import SellProductHandler from "./commands/sellProduct.js";
 import Channels from "./commands/exploreChannels.js";
-import About from "./commands/about.js";
-import ContactUs from "./commands/emp.js";
 import EMP from "./commands/emp.js";
 import Register from "./commands/registerProduct.js";
+import user from "./utils/telegramHelper.js";
+import AddChannel from "./commands/integrateChannels.js";
+import cache from "./utils/cache.js";
 
 connectDB();
+
+// Connect the user instance when the server starts
+// user
+//   .connect()
+//   .then(() => {
+//     console.log("User connected successfully");
+//   })
+//   .catch((error: Error) => {
+//     console.error("Error connecting user:", error);
+//   });
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf(BOT_TOKEN || "");
@@ -65,7 +76,20 @@ bot.action(
   }
 );
 
+//Add Channel
+bot.action("addChannel", (ctx) => {
+  const channel = new AddChannel(ctx);
+  channel.sendMessage();
+});
+
 bot.on("message", (ctx) => {
+  const chat_id = ctx.chat.id;
+  const state = cache.get(`${chat_id}_c`);
+  if (state) {
+    const channel = new AddChannel(ctx);
+    // return channel.save();
+  }
+
   const register = new Register(ctx);
   register.sendMessage();
 });
