@@ -1,7 +1,8 @@
 import { Context, Markup } from "telegraf";
 import makeAPICall from "../utils/api.js";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import cache from "../utils/cache.js";
+// import cache from "../config/cache.js";
+import Cache from "../services/cacheService.js";
 
 interface APIResponse {
   last_post_id: number;
@@ -63,9 +64,7 @@ class EMPBot {
       lastPostId = postIdFromCache;
     } else {
       try {
-        const responseData: APIResponse = JSON.parse(
-          await makeAPICall(randomCategory)
-        );
+        const responseData = await makeAPICall(randomCategory);
 
         lastPostId = responseData.last_post_id;
         this.saveLatestPostIdToCache(lastPostId);
@@ -79,15 +78,11 @@ class EMPBot {
   }
 
   private retrivePostIdfromCache() {
-    const cacheKey = "latest_post_id";
-    const finder = cache.get(cacheKey);
-    return finder;
+    return Cache.getValue("latest_post_id");
   }
 
   private saveLatestPostIdToCache(postid: number) {
-    const cacheKey = "latest_post_id";
-    const ttl = 24 * 60 * 60; // 1 day in seconds
-    cache.set(cacheKey, postid, ttl);
+    Cache.saveCache("latest_post_id", postid, 24 * 60 * 60);
   }
 
   private selectRandomCategory(): string {

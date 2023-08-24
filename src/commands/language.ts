@@ -1,7 +1,7 @@
 import { Context, Markup } from "telegraf";
-import cache from "../utils/cache.js";
-import { CustomCallbackQuery } from "../interfaces/cbkQuery.js";
-import updateLanguageWithRetry from "../utils/updatelanguagewithretries.js";
+import { CustomCallbackQuery } from "../interfaces/types.js";
+import updateLanguageWithRetry from "../utils/updatelanguage.js";
+import Cache from "../services/cacheService.js";
 
 class LanguageHandler {
   constructor(private ctx: Context) {}
@@ -28,13 +28,14 @@ class LanguageHandler {
 
   private saveTOCache(id: number, language: string) {
     //check if cache exist:
-    let getCache: { language: string } | undefined = cache.get(id!.toString());
+    let getCache = Cache.getValue(id!.toString()) as { language: string };
 
     if (getCache) {
       getCache!.language = language;
-      cache.set(id!.toString(), getCache);
+
+      Cache.saveCache(id!.toString(), getCache, 0);
     } else {
-      cache.set(id!.toString(), { language });
+      Cache.saveCache(id!.toString(), { language }, 0);
     }
   }
 

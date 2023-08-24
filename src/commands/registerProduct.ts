@@ -4,9 +4,9 @@ import {
   CustomContactMessage,
   CustomImageMessage,
   CustomTextMessage,
-} from "../interfaces/cbkQuery.js";
-import cache from "../utils/cache.js";
+} from "../interfaces/types.js";
 import EMPBot from "./start.js";
+import Cache from "../services/cacheService.js";
 
 class Register {
   constructor(private ctx: Context) {}
@@ -21,8 +21,11 @@ class Register {
   }
 
   private createTemporaryCache(chatId: number, category: string) {
-    const data = { category: category, state: "title" };
-    cache.set(`${chatId}_d`, data, 3600); //1 hour
+    Cache.saveCache(
+      `${chatId}_d`,
+      { category: category, state: "title" },
+      3600
+    );
   }
 
   private nextState(state: string) {
@@ -46,13 +49,13 @@ class Register {
     cached.state = newState;
     cached[state] = input;
 
-    cache.set(`${chatId}_d`, cached, 3600);
+    Cache.saveCache(`${chatId}_d`, cached, 3600);
     console.log(cached);
   }
 
   private async getState() {
     const chatId = this.ctx.chat?.id;
-    const cached: { state: string } = cache.get(`${chatId}_d`)!;
+    const cached = Cache.getValue(`${chatId}_d`)!;
     if (!cached) return await new EMPBot(this.ctx).start("home");
     return cached;
   }

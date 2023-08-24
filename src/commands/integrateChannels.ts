@@ -1,8 +1,6 @@
 import { Context, Markup } from "telegraf";
-import cache from "../utils/cache.js";
-import { CustomTextMessage } from "../interfaces/cbkQuery.js";
-import user from "../utils/telegramHelper.js";
-import { Api } from "telegram";
+import { CustomTextMessage } from "../interfaces/types.js";
+import Cache from "../services/cacheService.js";
 
 class AddChannel {
   constructor(private ctx: Context) {}
@@ -21,17 +19,17 @@ class AddChannel {
     );
   }
 
-  //chat_is_c => cache key for channel registration
+  //chat_id_c => cache key for channel registration
   private cacheStorage(data: object) {
     const chat_id = this.ctx.chat?.id;
-    cache.set(`${chat_id}_c`, data, 3600);
+    Cache.saveCache(`${chat_id}_c`, data, 3600);
   }
 
   saveChannel() {
     const username = this.getUsername();
     this.cacheStorage({ state: "admin", channel: username });
 
-    //find channel Admins
+    //continue ....
     //
   }
 

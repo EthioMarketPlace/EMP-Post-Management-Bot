@@ -1,6 +1,6 @@
 import { Telegraf, Context } from "telegraf";
-import connectDB from "./utils/db.js";
-import { BOT_TOKEN } from "./utils/dotenv.js";
+import connectDB from "./config/db.js";
+import { BOT_TOKEN } from "./config/dotenv.js";
 import EMPBot from "./commands/start.js";
 import LanguageHandler from "./commands/language.js";
 import SellProductHandler from "./commands/sellProduct.js";
@@ -8,7 +8,7 @@ import Channels from "./commands/exploreChannels.js";
 import EMP from "./commands/emp.js";
 import Register from "./commands/registerProduct.js";
 import AddChannel from "./commands/integrateChannels.js";
-import cache from "./utils/cache.js";
+import Cache from "./services/cacheService.js";
 
 connectDB();
 
@@ -73,9 +73,9 @@ bot.action("addChannel", (ctx) => {
 
 bot.on("message", (ctx) => {
   const chat_id = ctx.chat.id;
-  const state = cache.get(`${chat_id}_c`);
+  const state = Cache.getValue(`${chat_id}_c`);
   if (state) {
-    const channel = new AddChannel(ctx);
+    // const channel = new AddChannel(ctx);
     // return channel.save();
   }
 

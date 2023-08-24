@@ -1,12 +1,9 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import { CustomCallbackQuery } from "../interfaces/cbkQuery.js";
+import { CustomCallbackQuery } from "../interfaces/types.js";
 
 class EMP {
   constructor(private ctx: Context) {}
-
-  //emp fb : https://www.facebook.com/profile.php?id=100087510051959
-  //emp insta : https://www.instagram.com/ethio_market_place/
 
   private about = "This is about section";
   private contactUs = "this is contact us section";
