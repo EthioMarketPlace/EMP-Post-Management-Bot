@@ -10,7 +10,7 @@
 - **BOT_TOKEN**=`<create your own telegram bot for development>`
 - **MONGO_URL**=`mongodb://127.0.0.1:27017/emp`
   > - Setup your mongo DB server locally
-- **API**=`telegram-channel-scraper-api-1lfd.vercel.app`
+- **API**=`https://telegram-channel-scraper-api-1lfd.vercel.app`
 
 ### ⚡️ Explanation of the main folders and files:
 
