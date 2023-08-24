@@ -7,21 +7,10 @@ import SellProductHandler from "./commands/sellProduct.js";
 import Channels from "./commands/exploreChannels.js";
 import EMP from "./commands/emp.js";
 import Register from "./commands/registerProduct.js";
-import user from "./utils/telegramHelper.js";
 import AddChannel from "./commands/integrateChannels.js";
 import cache from "./utils/cache.js";
 
 connectDB();
-
-// Connect the user instance when the server starts
-// user
-//   .connect()
-//   .then(() => {
-//     console.log("User connected successfully");
-//   })
-//   .catch((error: Error) => {
-//     console.error("Error connecting user:", error);
-//   });
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf(BOT_TOKEN || "");
