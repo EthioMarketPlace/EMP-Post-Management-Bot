@@ -1,6 +1,7 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
 import { CustomCallbackQuery } from "../interfaces/types.js";
+import Keyboard from "../markup/markup.js";
 
 class EMP {
   constructor(private ctx: Context) {}
@@ -18,9 +19,7 @@ class EMP {
   }
 
   private homeKeyboard() {
-    return Markup.inlineKeyboard([
-      Markup.button.callback("🏡 Go To Home", "home"),
-    ]);
+    return Keyboard.redirectToHome();
   }
 
   private async sendAboutSection(

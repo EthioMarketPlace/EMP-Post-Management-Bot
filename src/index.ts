@@ -1,4 +1,4 @@
-import { Telegraf, Context } from "telegraf";
+import { Telegraf } from "telegraf";
 import connectDB from "./config/db.js";
 import { BOT_TOKEN } from "./config/dotenv.js";
 import EMPBot from "./commands/start.js";

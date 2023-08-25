@@ -1,12 +1,8 @@
 import { Context, Markup } from "telegraf";
-import makeAPICall from "../utils/api.js";
+import makeAPICall from "../utils/api.ts";
 import { InlineKeyboardMarkup } from "telegraf/types";
-// import cache from "../config/cache.js";
-import Cache from "../services/cacheService.js";
-
-interface APIResponse {
-  last_post_id: number;
-}
+import Cache from "../services/cacheService.ts";
+import Keyboard from "../markup/markup.ts";
 
 class EMPBot {
   constructor(private ctx: Context) {}
@@ -35,24 +31,7 @@ class EMPBot {
   }
 
   private generateInlineKeyboard() {
-    return Markup.inlineKeyboard([
-      [
-        Markup.button.callback("📢 Add Channel", "addChannel"),
-        Markup.button.callback("💰 Sell Product", "sell"),
-      ],
-      [Markup.button.callback("🔍 Explore EMP Channels", "exploreChannels")],
-      [
-        Markup.button.callback(
-          "🌐 EMP [ Instagram ] or [ Facebook ]",
-          "empsocial"
-        ),
-      ],
-      [
-        Markup.button.callback("🗣️ Language", "language"),
-        Markup.button.callback("ℹ️ About", "about"),
-        Markup.button.callback("📞 Contact Us", "contactUs"),
-      ],
-    ]);
+    return Keyboard.home();
   }
 
   private async fetchLatestPost() {

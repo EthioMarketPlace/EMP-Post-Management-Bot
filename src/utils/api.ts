@@ -1,4 +1,4 @@
-import { API } from "../config/dotenv.js";
+import { API } from "../config/dotenv.ts";
 
 import axios from "axios";
 

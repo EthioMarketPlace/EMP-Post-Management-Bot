@@ -2,19 +2,13 @@ import { Context, Markup } from "telegraf";
 import { CustomCallbackQuery } from "../interfaces/types.js";
 import updateLanguageWithRetry from "../utils/updatelanguage.js";
 import Cache from "../services/cacheService.js";
+import Keyboard from "../markup/markup.js";
 
 class LanguageHandler {
   constructor(private ctx: Context) {}
 
   private languageOptions() {
-    return Markup.inlineKeyboard([
-      [
-        Markup.button.callback("🇺🇸 English", "English"),
-        Markup.button.callback("🇪🇹 Oromo", "Oromo"),
-        Markup.button.callback("🇪🇹 Amhara", "Amhara"),
-      ],
-      [Markup.button.callback("🏡 Go To Home", "home")],
-    ]);
+    return Keyboard.languageOptions();
   }
 
   async showLanguageOptions() {

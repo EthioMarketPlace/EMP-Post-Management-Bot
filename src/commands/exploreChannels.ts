@@ -1,5 +1,6 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
+import Keyboard from "../markup/markup.js";
 
 class Channels {
   constructor(private ctx: Context) {}
@@ -11,9 +12,7 @@ class Channels {
   }
 
   private Kbds() {
-    return Markup.inlineKeyboard([
-      Markup.button.callback("🏡 Go To Home", "home"),
-    ]);
+    return Keyboard.redirectToHome();
   }
 
   private channelLists(): string {

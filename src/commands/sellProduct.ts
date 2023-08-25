@@ -1,4 +1,5 @@
-import { Context, Markup } from "telegraf";
+import { Context } from "telegraf";
+import Keyboard from "../markup/markup.js";
 
 class SellProductHandler {
   constructor(private ctx: Context) {}
@@ -12,22 +13,7 @@ class SellProductHandler {
   }
 
   private generateCategoriesKbd() {
-    return Markup.inlineKeyboard([
-      [
-        Markup.button.callback("👟 Shoes", "shoes"),
-        Markup.button.callback("🚗 Cars", "cars"),
-        Markup.button.callback("👩‍🎨 Arts", "arts"),
-      ],
-      [
-        Markup.button.callback("📺 Electronics", "electronics"),
-        Markup.button.callback("💄 Cosmetics", "cosmetics"),
-      ],
-      [
-        Markup.button.callback("👕 Clothes", "clothes"),
-        Markup.button.callback("🏘️ Houses", "houses"),
-      ],
-      [Markup.button.callback("🏡 Go To Home", "home")],
-    ]);
+    return Keyboard.categories();
   }
 }
 

@@ -1,5 +1,6 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
+import Keyboard from "../markup/markup.js";
 
 class About {
   constructor(private ctx: Context) {}
@@ -12,9 +13,7 @@ class About {
   }
 
   private homeKeyboard() {
-    return Markup.inlineKeyboard([
-      Markup.button.callback("🏡 Go To Home", "home"),
-    ]);
+    return Keyboard.redirectToHome();
   }
 
   private async sendAboutSection(
