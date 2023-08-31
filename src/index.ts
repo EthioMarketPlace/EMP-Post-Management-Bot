@@ -9,11 +9,14 @@ import EMP from "./commands/emp.js";
 import Register from "./commands/registerProduct.js";
 import AddChannel from "./commands/integrateChannels.js";
 import Cache from "./services/cacheService.js";
-
-connectDB();
+import globalMiddleware from "./middlewares/global.ts";
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf(BOT_TOKEN || "");
+connectDB();
+
+// global middleware
+bot.use(globalMiddleware);
 
 // starting bot
 bot.start((ctx) => {
