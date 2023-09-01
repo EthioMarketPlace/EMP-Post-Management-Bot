@@ -57,6 +57,13 @@ class Keyboard {
       Markup.button.callback("🏡 Go To Home", "home"),
     ]);
   }
+
+  static product = Markup.inlineKeyboard([
+    [
+      Markup.button.callback("✅ Confirm", "confirm"),
+      Markup.button.callback("❌ Cancel", "cancel"),
+    ],
+  ]);
 }
 
 export default Keyboard;
