@@ -6,14 +6,19 @@ import LanguageHandler from "./commands/language.js";
 import SellProductHandler from "./commands/sellProduct.js";
 import Channels from "./commands/exploreChannels.js";
 import EMP from "./commands/emp.js";
-import Register from "./commands/registerProduct.js";
 import AddChannel from "./commands/integrateChannels.js";
-import Cache from "./services/cacheService.js";
+import RegHandler from "./commands/regHandler.ts";
+import ProductHandler from "./commands/product.ts";
+import CommandHandler from "./commands/commandHandler.ts";
 
 connectDB();
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf(BOT_TOKEN || "");
+
+// bot.use((ctx) => {
+//   console.log(ctx.message);
+// });
 
 // starting bot
 bot.start((ctx) => {
@@ -60,8 +65,8 @@ bot.action(["about", "contactUs", "empsocial"], (ctx) => {
 bot.action(
   ["shoes", "cars", "arts", "electronics", "cosmetics", "clothes", "houses"],
   (ctx) => {
-    const register = new Register(ctx);
-    register.category();
+    const register = new RegHandler(ctx);
+    register.saveCategory();
   }
 );
 
@@ -71,16 +76,21 @@ bot.action("addChannel", (ctx) => {
   channel.sendMessage();
 });
 
-bot.on("message", (ctx) => {
-  const chat_id = ctx.chat.id;
-  const state = Cache.getValue(`${chat_id}_c`);
-  if (state) {
-    // const channel = new AddChannel(ctx);
-    // return channel.save();
-  }
+//confirm product
+bot.action("confirm", (ctx) => {
+  new ProductHandler(ctx).confirm();
+});
 
-  const register = new Register(ctx);
-  register.sendMessage();
+bot.action("cancel", (ctx) => {
+  new ProductHandler(ctx).cancel();
+});
+
+bot.command(["home", "title", "description", "price", "contact"], (ctx) => {
+  new CommandHandler(ctx).handler();
+});
+
+bot.on("message", (ctx) => {
+  new RegHandler(ctx).handler();
 });
 
 //Global Error handler
