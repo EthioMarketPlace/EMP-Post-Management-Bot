@@ -3,8 +3,9 @@ import makeAPICall from "../utils/api.ts";
 import { InlineKeyboardMarkup } from "telegraf/types";
 import Cache from "../services/cacheService.ts";
 import Keyboard from "../markup/markup.ts";
+import { BotInterface } from "../interfaces/types.ts";
 
-class EMPBot {
+class EMPBot implements BotInterface {
   constructor(private ctx: Context) {}
 
   async start(to: string) {

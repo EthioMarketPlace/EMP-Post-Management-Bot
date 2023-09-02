@@ -6,7 +6,7 @@ import { english } from "../languages/english.ts";
 import Keyboard from "../markup/markup.ts";
 
 class CommandHandler {
-  constructor(private ctx: Context) {}
+  constructor(private ctx: Context, private empBot?: EMPBot) {}
 
   async handler() {
     const message = this.ctx.message as CustomTextMessage;
@@ -19,7 +19,6 @@ class CommandHandler {
     if (cached.photo) delete cached.photo;
 
     Cache.saveCache(`${this.ctx.chat?.id}_d`, cached, 3600);
-
     if (command === "contact") {
       return await this.ctx.replyWithHTML(english[command], Keyboard.contact());
     } else {
@@ -34,7 +33,8 @@ class CommandHandler {
   }
 
   private returnHome() {
-    new EMPBot(this.ctx).start("start");
+    this.empBot!.start("start");
+    // new EMPBot(this.ctx).start("start");
   }
 }
 
