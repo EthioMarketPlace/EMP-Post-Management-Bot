@@ -5,7 +5,7 @@ import Cache from "../services/cacheService.ts";
 import Keyboard from "../markup/markup.ts";
 import { BotInterface } from "../interfaces/types.ts";
 
-class EMPBot implements BotInterface {
+class EMPBot {
   constructor(private ctx: Context) {}
 
   async start(to: string) {
