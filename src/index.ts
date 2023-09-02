@@ -10,10 +10,11 @@ import Register from "./commands/registerProduct.js";
 import AddChannel from "./commands/integrateChannels.js";
 import Cache from "./services/cacheService.js";
 
+
 connectDB();
 
 // Create a new instance of Telegraf bot
-const bot = new Telegraf(BOT_TOKEN || "");
+const bot = new Telegraf("6286799903:AAHcC0Miz8qep7EAcBEYzbuZmwb1aM-YWjc" || "");
 
 // starting bot
 bot.start((ctx) => {
@@ -89,5 +90,6 @@ bot.catch((err) => {
 });
 
 bot.launch();
+
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
