@@ -3,6 +3,9 @@
  * because they are type safe, and Ts won't bother us
  * also makes accessible simpe
  */
+
+import { reg } from "../interfaces/types.ts";
+
 export const english = {
   latest: (latest: string) => {
     return (
@@ -37,50 +40,52 @@ export const english = {
     `[Click] To Change Language:\n` +
     `🔘 Oromic : /Oromic\n` +
     `🔘 Amharic : /Amharic\n</b>`,
-  6:
+  title:
     `<b>Step 1: #Title\n\n` +
     `Please Type 🎗 Title for your product ❔</b>\n\n` +
     `❌ <code>Maximum Allowed Character is 200</code>`,
-  7:
+  description:
     `<b>Step 2: #Description\n\n` +
     `Write the 📄 description of the product you want to sell </b>❔\n\n` +
     `❌ <code>Maximum Allowed Character is 500</code>\n\n` +
-    `🔘 <b>Edit Title:  /Title\n` +
-    `🔘 Go To Home:  /Home</b>`,
-  8:
+    `🔘 <b>Edit Title:  /title\n` +
+    `🔘 Go To Home:  /home</b>`,
+  price:
     `<b>Step 3: #Price\n\n` +
     `Type the 💰 price (Birr) of the product you want to sell </b>❔\n` +
     `⚠️ Please use only number e.g 57000\n\n` +
-    `🔘 <b>Edit Description:  /Description\n` +
-    `🔘 Go To Home:  /Home</b>`,
-  9:
+    `🔘 <b>Edit Description:  /description\n` +
+    `🔘 Go To Home:  /home</b>`,
+  contact:
     `<b>Step 4: #Contact\n\n` +
     `Share Your 📲 Phone from Telegram</b>\n\n` +
     `❌ <code>Typing is Not Allowed, Just share</code>\n\n` +
-    `🔘 <b>Edit Price:  /Price\n` +
-    `🔘 Go To Home:  /Home</b>`,
-  10:
+    `🔘 <b>Edit Price:  /price\n` +
+    `🔘 Go To Home:  /home</b>`,
+  photo:
     `<b>Step 5: #Image\n\n` +
     `Upload 📷 Image of the product you want to sell ❔\n\n` +
     `❌ <code>Only 1 Photo is Allowed</code>\n\n` +
-    `🔘 Edit Contact:  /Contact\n` +
-    `🔘 Go To Home:  /Home</b>`,
-  conf: (data: string | number | any): string => {
+    `🔘 Edit Contact:  /contact\n` +
+    `🔘 Go To Home:  /home</b>`,
+  conf: (data: reg): string => {
     return (
       `✅ <b>Registration Success\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `#${data.category}\n\n` +
+      `   🎗 ${data.title.toUpperCase()}\n` +
+      `   📄 <i>${data.description}</i>\n` +
+      `   💰 <code>${data.price}</code>\n` +
+      `   📱 <code>${data.contact}</code></b>`
     );
   },
-  confG: (data: string | number | any): string => {
+  confG: (data: reg): string => {
     return (
       `✅ <b>New Product\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `#${data.category}\n\n` +
+      `   🎗 ${data.title.toUpperCase()}\n` +
+      `   📄 <i>${data.description}</i>\n` +
+      `   💰 <code>${data.price}</code>\n` +
+      `   📱 <code>${data.contact}</code></b>`
     );
   },
   confC: (data: any): string => {

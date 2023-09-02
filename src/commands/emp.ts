@@ -2,11 +2,12 @@ import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
 import { CustomCallbackQuery } from "../interfaces/types.js";
 import Keyboard from "../markup/markup.js";
+import { english } from "../languages/english.ts";
 
 class EMP {
   constructor(private ctx: Context) {}
 
-  private about = "This is about section";
+  private about = english.about;
   private contactUs = "this is contact us section";
   private empSocial =
     "🌐 <b>Medias\n\n" +
@@ -33,7 +34,7 @@ class EMP {
         ? this.contactUs
         : this.empSocial;
 
-    this.ctx.editMessageText(message, {
+    this.ctx.editMessageText(message as string, {
       parse_mode: "HTML",
       reply_markup: keyboard.reply_markup,
     });
