@@ -3,6 +3,7 @@ import { CustomTextMessage, reg, status } from "../interfaces/types.ts";
 import Cache from "../services/cacheService.ts";
 import EMPBot from "./start.ts";
 import { english } from "../languages/english.ts";
+import Keyboard from "../markup/markup.ts";
 
 class CommandHandler {
   constructor(private ctx: Context) {}
@@ -18,7 +19,12 @@ class CommandHandler {
     if (cached.photo) delete cached.photo;
 
     Cache.saveCache(`${this.ctx.chat?.id}_d`, cached, 3600);
-    await this.ctx.replyWithHTML(english[command]);
+
+    if (command === "contact") {
+      return await this.ctx.replyWithHTML(english[command], Keyboard.contact());
+    } else {
+      await this.ctx.replyWithHTML(english[command]);
+    }
   }
 
   private getCached() {

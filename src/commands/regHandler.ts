@@ -79,7 +79,7 @@ class RegHandler {
       await this.ctx.replyWithPhoto(cached.photo, {
         parse_mode: "HTML",
         caption: english.conf(cached),
-        reply_markup: Keyboard.product.reply_markup,
+        reply_markup: Keyboard.product().reply_markup,
       });
   }
 
