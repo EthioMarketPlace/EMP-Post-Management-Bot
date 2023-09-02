@@ -7,7 +7,7 @@ export type CustomCallbackQuery = CallbackQuery & {
 };
 
 export type CustomContactMessage = Message & {
-  contact: string;
+  contact: { phone_number: string; user_id: number };
 };
 
 export type CustomTextMessage = Message & {
@@ -15,5 +15,18 @@ export type CustomTextMessage = Message & {
 };
 
 export type CustomImageMessage = Message & {
-  photo: number[];
+  photo: [{ file_id: string }];
 };
+
+export interface reg {
+  state: string;
+  title: string;
+  description: string;
+  price: string;
+  contact: string;
+  photo?: string;
+  category: string;
+  id: number;
+}
+
+export type status = "title" | "description" | "price" | "contact" | "photo";

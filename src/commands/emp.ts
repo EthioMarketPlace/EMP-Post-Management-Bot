@@ -34,7 +34,7 @@ class EMP {
         ? this.contactUs
         : this.empSocial;
 
-    this.ctx.editMessageText(message, {
+    this.ctx.editMessageText(message as string, {
       parse_mode: "HTML",
       reply_markup: keyboard.reply_markup,
     });

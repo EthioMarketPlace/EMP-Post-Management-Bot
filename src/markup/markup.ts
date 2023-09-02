@@ -57,6 +57,21 @@ class Keyboard {
       Markup.button.callback("🏡 Go To Home", "home"),
     ]);
   }
+
+  static product() {
+    return Markup.inlineKeyboard([
+      Markup.button.callback("✅ Confirm", "confirm"),
+      Markup.button.callback("❌ Cancel", "cancel"),
+    ]);
+  }
+
+  static contact() {
+    return Markup.keyboard([
+      Markup.button.contactRequest("☎️ Share Your Contact"),
+    ])
+      .oneTime()
+      .resize();
+  }
 }
 
 export default Keyboard;
