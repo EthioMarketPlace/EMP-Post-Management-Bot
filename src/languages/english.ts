@@ -4,7 +4,7 @@
  * also makes accessible simpe
  */
 
-import { reg } from "../interfaces/types.ts";
+import { reg } from "../types/types.ts";
 
 export const english = {
   latest: (latest: string) => {

@@ -1,6 +1,6 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import { CustomCallbackQuery } from "../interfaces/types.ts";
+import { CustomCallbackQuery } from "../types/types.ts";
 import Keyboard from "../markup/markup.ts";
 import { english } from "../languages/english.ts";
 

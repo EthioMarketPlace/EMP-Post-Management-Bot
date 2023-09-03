@@ -7,7 +7,7 @@ import {
   CustomTextMessage,
   reg,
   status,
-} from "../interfaces/types.ts";
+} from "../types/types.ts";
 import { english } from "../languages/english.ts";
 import EMPBot from "./start.ts";
 import Keyboard from "../markup/markup.ts";

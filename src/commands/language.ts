@@ -1,8 +1,10 @@
 import { Context, Markup } from "telegraf";
-import { CustomCallbackQuery } from "../interfaces/types.js";
+import { CustomCallbackQuery } from "../types/types.ts";
 import updateLanguageWithRetry from "../utils/updatelanguage.js";
 import Cache from "../services/cacheService.js";
 import Keyboard from "../markup/markup.js";
+import DB from "../services/databaseService.ts";
+import retryOperation from "../utils/updatelanguage.js";
 
 class LanguageHandler {
   constructor(private ctx: Context) {}
@@ -41,19 +43,15 @@ class LanguageHandler {
     // debugger;
     this.saveTOCache(id!, language);
 
-    await this.ctx
-      .editMessageText(
-        `<b>Select your language:\n\n✅ Selected :</b> 🎗<code>${language}</code>🎗`,
-        {
-          reply_markup: this.languageOptions().reply_markup,
-          parse_mode: "HTML",
-        }
-      )
-      .catch((error) => {
-        console.log(error);
-      });
+    await this.ctx.editMessageText(
+      `<b>Select your language:\n\n✅ Selected :</b> 🎗<code>${language}</code>🎗`,
+      {
+        reply_markup: this.languageOptions().reply_markup,
+        parse_mode: "HTML",
+      }
+    );
 
-    await updateLanguageWithRetry(id!, language, 10); //retry 10 times, incase of connection fails
+    await retryOperation(10, () => DB.changeLanguage(id!, language));
   }
 }
 

@@ -1,5 +1,5 @@
 import { Context, Markup } from "telegraf";
-import { CustomTextMessage } from "../interfaces/types.js";
+import { CustomTextMessage } from "../types/types.ts";
 import Cache from "../services/cacheService.js";
 
 class AddChannel {
