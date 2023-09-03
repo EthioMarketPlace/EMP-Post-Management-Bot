@@ -1,18 +1,14 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import Keyboard from "../markup/markup.js";
+import Keyboard from "../markup/markup.ts";
 
 class Channels {
   constructor(private ctx: Context) {}
 
   async list() {
     const channels = this.channelLists();
-    const keyboard = this.Kbds();
+    const keyboard = Keyboard.redirectToHome();
     await this.sendChannelList(channels, keyboard);
-  }
-
-  private Kbds() {
-    return Keyboard.redirectToHome();
   }
 
   private channelLists(): string {

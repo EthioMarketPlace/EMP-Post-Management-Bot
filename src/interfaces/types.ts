@@ -1,6 +1,8 @@
 // customTypes.ts
 
 import { CallbackQuery, Message } from "telegraf/types";
+import { Context, Markup } from "telegraf";
+import { InlineKeyboardMarkup } from "telegraf/types";
 
 export type CustomCallbackQuery = CallbackQuery & {
   data: string;
@@ -30,3 +32,9 @@ export interface reg {
 }
 
 export type status = "title" | "description" | "price" | "contact" | "photo";
+
+export interface BotInterface {
+  start(to: string): Promise<void>;
+
+  // Add other common methods and properties here
+}

@@ -1,8 +1,8 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import { CustomCallbackQuery } from "../interfaces/types.js";
-import Keyboard from "../markup/markup.js";
 import Language from "../languages/manager.ts";
+import { CustomCallbackQuery } from "../interfaces/types.ts";
+import Keyboard from "../markup/markup.ts";
 
 class EMP {
   constructor(private ctx: Context) {}
@@ -15,12 +15,8 @@ class EMP {
     `📷 <u>Instagram :</u> https://www.instagram.com/ethio_market_place/</b>`;
 
   async display() {
-    const homeKbd = this.homeKeyboard();
+    const homeKbd = Keyboard.redirectToHome();
     await this.sendAboutSection(homeKbd);
-  }
-
-  private homeKeyboard() {
-    return Keyboard.redirectToHome();
   }
 
   private async sendAboutSection(
