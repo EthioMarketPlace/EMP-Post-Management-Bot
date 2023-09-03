@@ -28,9 +28,6 @@ class AddChannel {
   saveChannel() {
     const username = this.getUsername();
     this.cacheStorage({ state: "admin", channel: username });
-
-    //continue ....
-    //
   }
 
   private getUsername() {

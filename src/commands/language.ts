@@ -9,12 +9,8 @@ import retryOperation from "../utils/updatelanguage.js";
 class LanguageHandler {
   constructor(private ctx: Context) {}
 
-  private languageOptions() {
-    return Keyboard.languageOptions();
-  }
-
   async showLanguageOptions() {
-    const keyboard = this.languageOptions();
+    const keyboard = Keyboard.languageOptions();
 
     await this.ctx.editMessageText(
       "<b>Select your language:\n\n✅ Selected :</b> <code>English</code>",
@@ -46,7 +42,7 @@ class LanguageHandler {
     await this.ctx.editMessageText(
       `<b>Select your language:\n\n✅ Selected :</b> 🎗<code>${language}</code>🎗`,
       {
-        reply_markup: this.languageOptions().reply_markup,
+        reply_markup: Keyboard.languageOptions().reply_markup,
         parse_mode: "HTML",
       }
     );
