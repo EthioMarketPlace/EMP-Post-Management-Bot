@@ -6,7 +6,7 @@ class Contact {
   constructor(private ctx: Context) {}
 
   async display() {
-    const contact = "This is contactUs Section";
+    const contact = "This is contactUs Section Thanks for visiting";
     const homeKbd = this.homeKeyboard();
 
     await this.sendcontactUs(contact, homeKbd);
