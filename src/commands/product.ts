@@ -1,7 +1,7 @@
 import { Context } from "telegraf";
 import Cache from "../services/cacheService.ts";
 import EMPBot from "./start.ts";
-import { reg } from "../interfaces/types.ts";
+import { reg } from "../types/types.ts";
 import { english } from "../languages/english.ts";
 
 class ProductHandler {

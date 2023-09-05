@@ -7,7 +7,7 @@ import {
   CustomTextMessage,
   reg,
   status,
-} from "../interfaces/types.ts";
+} from "../types/types.ts";
 import { english } from "../languages/english.ts";
 import EMPBot from "./start.ts";
 import Keyboard from "../markup/markup.ts";
@@ -79,7 +79,7 @@ class RegHandler {
       await this.ctx.replyWithPhoto(cached.photo, {
         parse_mode: "HTML",
         caption: english.conf(cached),
-        reply_markup: Keyboard.product.reply_markup,
+        reply_markup: Keyboard.product().reply_markup,
       });
   }
 

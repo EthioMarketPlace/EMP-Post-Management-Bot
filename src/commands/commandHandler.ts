@@ -1,11 +1,12 @@
 import { Context } from "telegraf";
-import { CustomTextMessage, reg, status } from "../interfaces/types.ts";
+import { CustomTextMessage, reg, status } from "../types/types.ts";
 import Cache from "../services/cacheService.ts";
 import EMPBot from "./start.ts";
 import { english } from "../languages/english.ts";
+import Keyboard from "../markup/markup.ts";
 
 class CommandHandler {
-  constructor(private ctx: Context) {}
+  constructor(private ctx: Context, private empBot?: EMPBot) {}
 
   async handler() {
     const message = this.ctx.message as CustomTextMessage;
@@ -18,7 +19,11 @@ class CommandHandler {
     if (cached.photo) delete cached.photo;
 
     Cache.saveCache(`${this.ctx.chat?.id}_d`, cached, 3600);
-    await this.ctx.replyWithHTML(english[command]);
+    if (command === "contact") {
+      return await this.ctx.replyWithHTML(english[command], Keyboard.contact());
+    } else {
+      await this.ctx.replyWithHTML(english[command]);
+    }
   }
 
   private getCached() {
@@ -28,7 +33,8 @@ class CommandHandler {
   }
 
   private returnHome() {
-    new EMPBot(this.ctx).start("start");
+    this.empBot!.start("start");
+    // new EMPBot(this.ctx).start("start");
   }
 }
 

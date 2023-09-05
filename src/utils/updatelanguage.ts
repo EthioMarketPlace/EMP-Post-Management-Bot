@@ -1,31 +1,21 @@
-import User from "../models/user.ts";
-
-async function updateLanguageWithRetry(
-  id: number,
-  language: string,
-  maxRetries: number
-): Promise<void> {
+async function retryOperation<T>(
+  maxRetries: number,
+  operation: () => Promise<T>
+): Promise<T> {
   try {
-    const user = await User.findOneAndUpdate(
-      { id: id },
-      { language: language },
-      { upsert: true, new: true }
-    );
-
-    if (user) {
-      console.log("Language successfully updated:", user.language);
-    }
+    return await operation();
   } catch (error) {
-    console.error("Error updating language:", error);
+    console.error("Error:", error);
 
     if (maxRetries > 0) {
       console.log(`Retrying in 0.5 seconds... (Retries left: ${maxRetries})`);
       await new Promise((resolve) => setTimeout(resolve, 500)); // Wait for 0.5 seconds
-      await updateLanguageWithRetry(id, language, maxRetries - 1);
+      return retryOperation(maxRetries - 1, operation);
     } else {
-      console.error("Max retries reached. Unable to update language.");
+      console.error("Max retries reached. Unable to complete the operation.");
+      throw error; // Rethrow the error if retries are exhausted
     }
   }
 }
 
-export default updateLanguageWithRetry;
+export default retryOperation;
