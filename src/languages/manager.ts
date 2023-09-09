@@ -3,16 +3,19 @@ import { amharic } from "./amharic.js";
 import { oromic } from "./oromic.js";
 import { english } from "./english.js";
 import Cache from "../services/cacheService.js";
+import { Context } from "telegraf";
 
 class Language {
-  static Selector = (ctx: any): any => {
+  static Selector = (ctx: Context): any => {
     //Chat id from <cache>
-    let _ChatId: any = Cache.getValue(ctx.chat.id);
+    let { user } = Cache.getValue(ctx.chat?.id.toString() || "") as {
+      user: { language: string };
+    };
 
     //<_L> stands for language
-    if (_ChatId && _ChatId._L) {
-      if (_ChatId._L == "Amharic") return amharic;
-      else if (_ChatId._L == "Oromic") return oromic;
+    if (user && user.language) {
+      if (user.language == "Amhara") return amharic;
+      else if (user.language == "Oromo") return oromic;
       else return english;
     }
     //the Default <English>

@@ -11,6 +11,7 @@ import RegHandler from "./commands/regHandler.ts";
 import ProductHandler from "./commands/product.ts";
 import CommandHandler from "./commands/commandHandler.ts";
 import globalMiddleware from "./middlewares/global.ts";
+import Language from "./languages/manager.ts";
 
 connectDB();
 
@@ -19,6 +20,11 @@ const bot = new Telegraf(BOT_TOKEN || "");
 
 // global middleware
 bot.use(globalMiddleware);
+
+bot.use((ctx, next) => {
+  (global as any)._L = Language.Selector(ctx);
+  next();
+});
 
 // bot.use((ctx) => {
 //   console.log(ctx.message);
