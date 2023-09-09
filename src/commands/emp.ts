@@ -7,7 +7,7 @@ import { english } from "../languages/english.ts";
 class EMP {
   constructor(private ctx: Context) {}
 
-  private about = english.about;
+  private about = (global as any)._L["about"];
   private contactUs = "this is contact us section";
   private empSocial =
     "🌐 <b>Medias\n\n" +
