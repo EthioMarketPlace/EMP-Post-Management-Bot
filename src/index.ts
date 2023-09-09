@@ -10,12 +10,15 @@ import AddChannel from "./commands/integrateChannels.js";
 import RegHandler from "./commands/regHandler.ts";
 import ProductHandler from "./commands/product.ts";
 import CommandHandler from "./commands/commandHandler.ts";
-
+import globalMiddleware from "./middlewares/global.ts";
 
 connectDB();
 
 // Create a new instance of Telegraf bot
-const bot = new Telegraf("6286799903:AAHcC0Miz8qep7EAcBEYzbuZmwb1aM-YWjc" || "");
+const bot = new Telegraf(BOT_TOKEN || "");
+
+// global middleware
+bot.use(globalMiddleware);
 
 // bot.use((ctx) => {
 //   console.log(ctx.message);
