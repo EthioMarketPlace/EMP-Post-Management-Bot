@@ -1,5 +1,5 @@
 import { Context } from "telegraf";
-import { CustomTextMessage, reg, status } from "../types/types.ts";
+import { CustomTextMessage, reg, status } from "../types/interfaces.ts";
 import Cache from "../services/cacheService.ts";
 import EMPBot from "./start.ts";
 import { english } from "../languages/english.ts";

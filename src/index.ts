@@ -18,14 +18,9 @@ connectDB();
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf(BOT_TOKEN || "");
-connectDB();
 
 // global middleware
 bot.use(globalMiddleware);
-
-// bot.use((ctx) => {
-//   console.log(ctx.message);
-// });
 
 // starting bot
 bot.start((ctx) => {
@@ -100,7 +95,7 @@ bot.on("message", (ctx) => {
   new RegHandler(ctx).handler();
 });
 
-//Global Error handler
+//Global Error handler for Telegraf
 bot.catch((err) => {
   console.log(err);
 });

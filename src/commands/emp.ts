@@ -1,7 +1,7 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
 import Language from "../languages/manager.ts";
-import { CustomCallbackQuery } from "../interfaces/types.ts";
+import { CustomCallbackQuery } from "../types/interfaces.ts";
 import Keyboard from "../markup/markup.ts";
 
 class EMP {

@@ -1,5 +1,5 @@
 import { Context } from "telegraf";
-import { CustomCallbackQuery } from "../types/types.ts";
+import { CustomCallbackQuery } from "../types/interfaces.ts";
 
 import Cache from "../services/cacheService.js";
 import Keyboard from "../markup/markup.js";
@@ -10,7 +10,7 @@ class LanguageHandler {
   constructor(private ctx: Context) {}
 
   async showLanguageOptions() {
-    const keyboard = this.languageOptions();
+    const keyboard = Keyboard.languageOptions();
     const id = this.ctx.from?.id;
     const { user } = Cache.getValue(id!.toString()) as {
       user: { language: string };

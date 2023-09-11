@@ -3,7 +3,7 @@ import makeAPICall from "../utils/api.ts";
 import { InlineKeyboardMarkup } from "telegraf/types";
 import Cache from "../services/cacheService.ts";
 import Keyboard from "../markup/markup.ts";
-import { BotInterface } from "../types/types.ts";
+import { BotInterface } from "../types/interfaces.ts";
 
 class EMPBot {
   constructor(private ctx: Context) {}
