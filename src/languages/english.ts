@@ -35,7 +35,13 @@ export const english = {
     `<code>✅ Easy to use and manage your store with our simple interface.</code>\n\n` +
     `Check out already existed product by joining our channel\n` +
     `https://t.me/ethio_market_place`,
-  contactus: `This Is Contact Us Section in English`,
+  contactus:
+    `<b>Contact Us</b>\n\n` +
+    `Please contact one of us if you have any problems with the bot.\n` +
+    `@Me_abd\n` +
+    `@SolAdola\n` +
+    `@abduselam_m\n` +
+    `@pastoryoda\n`,
   language:
     `⚙️ <b>Languages\n\n` +
     `[Click] To Change Language:\n` +

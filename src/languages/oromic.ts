@@ -28,8 +28,13 @@ export const oromic = {
     `✅ Interface keenya salphaa ta'een itti fayyadamuu fi mana daldalaa keessan bulchuuf salphaadha</code>\n\n` +
     `Chaanaalii keenya join gochuun oomisha duraan jiru daawwadhaa\n` +
     `https://t.me/ethio_market_place`,
-  contactus: `This Is Contact Us Section in oromo`,
-
+  contactus:
+    `<b>Contact Us</b>\n\n` +
+    `Rakkoon bot irratti yoo isin mudate tokko keenya qunnamaa.\n` +
+    `@Me_abd\n` +
+    `@SolAdola\n` +
+    `@abduselam_m\n` +
+    `@pastoryoda\n`,
   language:
     `⚙️ <b>Qooqa Jijiruuf\n\n` +
     `Qooqa Jijiruuf 1 [xuqi]:\n` +

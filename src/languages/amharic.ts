@@ -29,7 +29,13 @@ export const amharic = {
     `<code>✅ ምርቶችዎን በእኛ ቦት ለመጠቀም እና ለማስተዳደር ቀላል።</code>\n\n` +
     `ቻናላችንን በመቀላቀል ያሉትን ምርቶች ይመልከቱ\n` +
     `https://t.me/ethio_market_place`,
-  contactus: `This Is Contact Us Section in amharic`,
+  contactus:
+    `<b>Contact Us</b>\n\n` +
+    `በቦት ላይ ምንም አይነት ችግር ካጋጠመዎት እባክዎን ከእኛ አንዱን ያነጋግሩ።\n` +
+    `@Me_abd\n` +
+    `@SolAdola\n` +
+    `@abduselam_m\n` +
+    `@pastoryoda\n`,
   language:
     `⚙️ <b>ቋንቋዎች\n\n` +
     `[Click] ቋንቋ ለመቀየር:\n` +
