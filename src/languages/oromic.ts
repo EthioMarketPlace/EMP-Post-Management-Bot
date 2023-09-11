@@ -66,27 +66,28 @@ export const oromic = {
   conf: (data: string | number | any): string => {
     return (
       `✅ <b>Milka'inaan galma'eera\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `#${data.category}\n\n` +
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 <i>${data.description}</i>\n\n` +
+      `💰 <code>${data.price}</code>\n` +
+      `📱 <code>${data.contact}</code></b>`
     );
   },
   confG: (data: string | number | any): string => {
     return (
       `✅ <b>Oomisha haaraa\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 <i>${data.description}</i>\n\n` +
+      `💰 <code>${data.price}</code>\n` +
+      `📱 <code>${data.contact}</code></b>`
     );
   },
   confC: (data: any): string => {
     return (
-      `🎗 <b>${data[6].toUpperCase()}\n\n` +
-      `📄 ${data[7]}\n\n   ` +
-      `💰 <code>${data[8]} BIRR</code>\n` +
-      `   📱 <code>${data[9]}</code>\n` +
+      `🎗 <b>${data.title.toUpperCase()}\n\n` +
+      `📄 ${data.description}\n\n   ` +
+      `💰 <code>${data.price} BIRR</code>\n` +
+      `   📱 <code>${data.contact}</code>\n` +
       `   👤 @${data.username}</b>\n\n` +
       `#${data.category}\n` +
       `From: @ethio_market_place_bot`

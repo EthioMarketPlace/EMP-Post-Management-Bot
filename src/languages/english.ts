@@ -92,10 +92,10 @@ export const english = {
   confC: (data: any): string => {
     return (
       `<b>✅ New\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 ${data[7]}\n\n   ` +
-      `💰 <code>${data[8]} BIRR</code>\n` +
-      `   📱 <code>${data[9]}</code>\n` +
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 ${data.description}\n\n   ` +
+      `💰 <code>${data.price} BIRR</code>\n` +
+      `   📱 <code>${data.contact}</code>\n` +
       `   👤 @${data.username}</b>\n\n` +
       `#${data.category}\n` +
       `From: @ethio_market_place_bot`

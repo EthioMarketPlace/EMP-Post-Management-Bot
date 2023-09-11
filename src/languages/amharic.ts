@@ -1,3 +1,5 @@
+import { reg } from "../types/interfaces.ts";
+
 export const amharic = {
   latest: (latest: string) => {
     return (
@@ -64,28 +66,30 @@ export const amharic = {
   conf: (data: string | number | any): string => {
     return (
       `✅ <b>የምዝገባ በተሳካ ሁኔታ ተጠናቋል \n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `#${data.category}\n\n` +
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 <i>${data.description}</i>\n\n` +
+      `💰 <code>${data.price}</code>\n` +
+      `📱 <code>${data.contact}</code></b>`
     );
   },
-  confG: (data: string | number | any): string => {
+  confG: (data: reg): string => {
     return (
       `✅ <b>አዲስ ምርት\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 <i>${data[7]}</i>\n\n` +
-      `💰 <code>${data[8]}</code>\n` +
-      `📱 <code>${data[9]}</code></b>`
+      `#${data.category}\n\n` +
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 <i>${data.description}</i>\n\n` +
+      `💰 <code>${data.price}</code>\n` +
+      `📱 <code>${data.contact}</code></b>`
     );
   },
   confC: (data: any): string => {
     return (
       `<b>✅ አዲስ\n\n` +
-      `🎗 ${data[6].toUpperCase()}\n\n` +
-      `📄 ${data[7]}\n\n   ` +
-      `💰 <code>${data[8]} ብር</code>\n` +
-      `   📱 <code>${data[9]}</code>\n` +
+      `🎗 ${data.title.toUpperCase()}\n\n` +
+      `📄 ${data.description}\n\n   ` +
+      `💰 <code>${data.price} ብር</code>\n` +
+      `   📱 <code>${data.contact}</code>\n` +
       `   👤 @${data.username}</b>\n\n` +
       `#${data.category}\n` +
       `ከ: @ethio_market_place_bot`

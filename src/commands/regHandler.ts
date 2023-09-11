@@ -8,9 +8,9 @@ import {
   reg,
   status,
 } from "../types/interfaces.ts";
-import { english } from "../languages/english.ts";
 import EMPBot from "./start.ts";
 import Keyboard from "../markup/markup.ts";
+import Language from "../languages/manager.ts";
 
 class RegHandler {
   constructor(private ctx: Context) {}
@@ -50,11 +50,12 @@ class RegHandler {
 
     Cache.saveCache(`${chatId}_d`, { category: input, state: "title" }, 3600);
 
-    await this.ctx.replyWithHTML(english["title"]);
+    await this.ctx.replyWithHTML(
+      Language.Selector(this.ctx.chat?.id.toString() as string)["title"]
+    );
   }
 
   async saveTitle() {
-    //update cache
     await this.common("title");
   }
 
@@ -78,7 +79,9 @@ class RegHandler {
     if (cached && cached.photo)
       await this.ctx.replyWithPhoto(cached.photo, {
         parse_mode: "HTML",
-        caption: english.conf(cached),
+        caption: Language.Selector(this.ctx.chat?.id.toString() as string).conf(
+          cached
+        ),
         reply_markup: Keyboard.product().reply_markup,
       });
   }
@@ -93,18 +96,26 @@ class RegHandler {
 
     //validate price
     if (cached.state === "price" && !Number(input)) {
-      await this.ctx.replyWithHTML(english["price"]);
+      await this.ctx.replyWithHTML(
+        Language.Selector(this.ctx.chat?.id.toString() as string)["price"]
+      );
       return;
     }
 
     //validate contact
     if (cached.state === "contact" && input === null) {
-      await this.ctx.replyWithHTML(english["contact"], { parse_mode: "HTML" });
+      await this.ctx.replyWithHTML(
+        Language.Selector(this.ctx.chat?.id.toString() as string)["contact"],
+        { parse_mode: "HTML" }
+      );
       return;
     }
 
     if (cached.state === "photo" && input === null) {
-      await this.ctx.replyWithHTML(english["photo"], { parse_mode: "HTML" });
+      await this.ctx.replyWithHTML(
+        Language.Selector(this.ctx.chat?.id.toString() as string)["photo"],
+        { parse_mode: "HTML" }
+      );
       return;
     }
 
@@ -123,7 +134,7 @@ class RegHandler {
 
     if (nextState === "contact") {
       return await this.ctx.replyWithHTML(
-        english[nextState],
+        Language.Selector(this.ctx.chat?.id.toString() as string)[nextState],
 
         Markup.keyboard([Markup.button.contactRequest("☎️ Share Your Contact")])
           .oneTime()
@@ -131,7 +142,9 @@ class RegHandler {
       );
     }
 
-    await this.ctx.replyWithHTML(english[nextState]);
+    await this.ctx.replyWithHTML(
+      Language.Selector(this.ctx.chat?.id.toString() as string)[nextState]
+    );
   }
 
   private nextState(state: string) {
