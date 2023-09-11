@@ -1,6 +1,6 @@
-import { Context, Markup } from "telegraf";
+import { Context } from "telegraf";
 import { CustomCallbackQuery } from "../types/types.ts";
-import updateLanguageWithRetry from "../utils/updatelanguage.js";
+
 import Cache from "../services/cacheService.js";
 import Keyboard from "../markup/markup.js";
 import DB from "../services/databaseService.ts";

@@ -10,16 +10,13 @@ import AddChannel from "./commands/integrateChannels.js";
 import RegHandler from "./commands/regHandler.ts";
 import ProductHandler from "./commands/product.ts";
 import CommandHandler from "./commands/commandHandler.ts";
+import { english } from "./languages/english.ts";
 
 
 connectDB();
 
 // Create a new instance of Telegraf bot
 const bot = new Telegraf("6286799903:AAHcC0Miz8qep7EAcBEYzbuZmwb1aM-YWjc" || "");
-
-// bot.use((ctx) => {
-//   console.log(ctx.message);
-// });
 
 // starting bot
 bot.start((ctx) => {

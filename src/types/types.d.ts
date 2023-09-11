@@ -1,4 +1,4 @@
 declare global {
-  var _L: null | any
+  var _L: any;
 }
-export {}
+export {};

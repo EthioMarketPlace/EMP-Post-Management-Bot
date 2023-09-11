@@ -11,7 +11,7 @@ class EMP {
   private contactUs = "this is contact us section";
   private empSocial =
     "🌐 <b>Medias\n\n" +
-    `👍 <u>faceboob :</u>\n https://www.facebook.com/profile.php?id=100087510051959\n\n` +
+    `👍 <u>facebook :</u>\n https://www.facebook.com/profile.php?id=100087510051959\n\n` +
     `📷 <u>Instagram :</u> https://www.instagram.com/ethio_market_place/</b>`;
 
   async display() {

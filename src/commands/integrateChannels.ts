@@ -1,4 +1,4 @@
-import { Context, Markup } from "telegraf";
+import { Context } from "telegraf";
 import { CustomTextMessage } from "../types/types.ts";
 import Cache from "../services/cacheService.js";
 
