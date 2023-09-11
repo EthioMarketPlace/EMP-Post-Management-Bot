@@ -1,7 +1,7 @@
 import { Context } from "telegraf";
 
 import EMP from "../src/commands/emp";
-import { CustomCallbackQuery } from "../src/types/types";
+import { CustomCallbackQuery } from "../src/types/interfaces";
 import Keyboard from "../src/markup/markup";
 
 describe("EMP", () => {

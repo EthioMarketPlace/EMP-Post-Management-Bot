@@ -2,7 +2,7 @@ import { Context } from "telegraf";
 import { english } from "../src/languages/english";
 import Keyboard from "../src/markup/markup";
 import CommandHandler from "../src/commands/commandHandler";
-import { CustomTextMessage } from "../src/interfaces/types";
+import { CustomTextMessage } from "../src/types/interfaces";
 import Cache from "../src/services/cacheService";
 import EMPBot from "../src/commands/start";
 

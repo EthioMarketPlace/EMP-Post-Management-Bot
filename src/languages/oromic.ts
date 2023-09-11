@@ -28,34 +28,36 @@ export const oromic = {
     `✅ Interface keenya salphaa ta'een itti fayyadamuu fi mana daldalaa keessan bulchuuf salphaadha</code>\n\n` +
     `Chaanaalii keenya join gochuun oomisha duraan jiru daawwadhaa\n` +
     `https://t.me/ethio_market_place`,
-  5:
+  contactus: `This Is Contact Us Section in oromo`,
+
+  language:
     `⚙️ <b>Qooqa Jijiruuf\n\n` +
     `Qooqa Jijiruuf 1 [xuqi]:\n` +
     `🔘 Amharic : /Amharic\n` +
     `🔘 English : /English</b>`,
-  6:
+  title:
     `<b>Dursa 1: #Mata Dure\n\n` +
     `🎗 Mata dure Oomisha kee barreessi ❔</b>\n\n` +
     `❌ <code>Yoo baayate qubee 200</code>`,
-  7:
+  description:
     `<b>Lammaffaarratti 2: #Ibsa\n\n` +
     `📄 Ibsa Oomisha  kee barreessun itti fufi❔</b>❔\n\n` +
     `❌ <code>Yoo baayate qubee 500</code>\n\n` +
     `🔘 <b>Mata duree Jijiruuf:  /Title\n` +
     `🔘 Gara Jalqabaatti deebi'uuf:  /Home</b>`,
-  8:
+  price:
     `<b>Sadaffaarratti 3: #kafaltii\n\n` +
     `💰 Kafaltii (Birr) Oomisha kee ittin gurguru barbaaddu barreessi</b>❔\n` +
     `⚠️ Lakkoofsa qofa fayadami fknf 57000\n\n` +
     `🔘 <b>ibsa jijiruuf:  /Description\n` +
     `🔘 Gara jalqabaatti deebi'uuf:  /Home</b>`,
-  9:
+  contact:
     `<b>Afuraffarratti 4: #Bilbila\n\n` +
     `Lakkofsa 📲 bilbilaa kee Telegrami irraa jiru qoodi</b>\n\n` +
     `❌ <code>baressun hin eeyyamamu,  phone kan jedhu cuqaasi</code>\n\n` +
     `🔘 <b>Kafaltii Jijjiiruuf:  /Price\n` +
     `🔘 Gara jalqabati deebi'uuf:  /Home</b>`,
-  10:
+  photo:
     `<b>Shanaffaarratti 5: #Suura\n\n` +
     `📷 Suuraa Oomisha kee tokko (1) faayila kan jedhu baniitii erg ❔\n\n` +
     `❌ <code>Suuraa tokko (1) qofaatu Eeyyamama</code>\n\n` +

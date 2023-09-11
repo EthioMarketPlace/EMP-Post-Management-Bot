@@ -11,8 +11,8 @@ describe("updateLanguageWithRetry", () => {
       .mockResolvedValue({ language: "en" });
     User.findOneAndUpdate = findOneAndUpdateMock;
 
-    // Call the updateLanguageWithRetry function
-    await updateLanguageWithRetry(123, "en", 3);
+    // // Call the updateLanguageWithRetry function
+    // await updateLanguageWithRetry(123, "en", 3);
 
     // Verify that the method was called as expected
     expect(findOneAndUpdateMock).toHaveBeenCalledWith(

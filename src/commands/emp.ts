@@ -9,7 +9,9 @@ class EMP {
 
   private about = Language.Selector(this.ctx.chat?.id.toString() as string)
     .about;
-  private contactUs = "this is contact us section";
+  private contactUs = Language.Selector(this.ctx.chat?.id.toString() as string)
+    .contactus;
+
   private empSocial =
     "🌐 <b>Medias\n\n" +
     `👍 <u>facebook :</u>\n https://www.facebook.com/profile.php?id=100087510051959\n\n` +
