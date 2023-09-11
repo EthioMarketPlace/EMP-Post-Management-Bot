@@ -7,12 +7,10 @@ import SellProductHandler from "./commands/sellProduct.js";
 import Channels from "./commands/exploreChannels.js";
 import EMP from "./commands/emp.js";
 import AddChannel from "./commands/integrateChannels.js";
-import Cache from "./services/cacheService.js";
 import globalMiddleware from "./middlewares/global.ts";
 import RegHandler from "./commands/regHandler.ts";
 import ProductHandler from "./commands/product.ts";
 import CommandHandler from "./commands/commandHandler.ts";
-import { english } from "./languages/english.ts";
 
 connectDB();
 

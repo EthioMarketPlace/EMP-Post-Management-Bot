@@ -7,7 +7,8 @@ import Keyboard from "../markup/markup.ts";
 class EMP {
   constructor(private ctx: Context) {}
 
-  private about = Language.Selector(this.ctx).about;
+  private about = Language.Selector(this.ctx.chat?.id.toString() as string)
+    .about;
   private contactUs = "this is contact us section";
   private empSocial =
     "🌐 <b>Medias\n\n" +
