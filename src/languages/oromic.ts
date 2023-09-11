@@ -30,7 +30,7 @@ export const oromic = {
     `https://t.me/ethio_market_place`,
   contactus:
     `<b>Contact Us</b>\n\n` +
-    `Rakkoon bot irratti yoo isin mudate tokko keenya qunnamaa.\n` +
+    `Rakkoon bot irratti yoo isin mudate, yaada, ykn waan biraa yoo qabaattan tokko keenya qunnamaa.\n` +
     `@Me_abd\n` +
     `@SolAdola\n` +
     `@abduselam_m\n` +

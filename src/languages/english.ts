@@ -37,7 +37,7 @@ export const english = {
     `https://t.me/ethio_market_place`,
   contactus:
     `<b>Contact Us</b>\n\n` +
-    `Please contact one of us if you have any problems with the bot.\n` +
+    `Please contact one of us if you have any problems with the bot, ideas, or anything else.\n` +
     `@Me_abd\n` +
     `@SolAdola\n` +
     `@abduselam_m\n` +

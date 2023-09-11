@@ -31,7 +31,7 @@ export const amharic = {
     `https://t.me/ethio_market_place`,
   contactus:
     `<b>Contact Us</b>\n\n` +
-    `በቦት ላይ ምንም አይነት ችግር ካጋጠመዎት እባክዎን ከእኛ አንዱን ያነጋግሩ።\n` +
+    `በዚህ ቦት ላይ ምንም አይነት ችግር ካጋጠመዎ፣ አስተያየት ወይም ሌላ ነገር ካለዎት እባክዎን ከመካከላችን አንዱን ያግኙ።\n` +
     `@Me_abd\n` +
     `@SolAdola\n` +
     `@abduselam_m\n` +
