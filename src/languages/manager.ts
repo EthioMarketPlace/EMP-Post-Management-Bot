@@ -6,17 +6,11 @@ import Cache from "../services/cacheService.js";
 
 class Language {
   static Selector = (ctx: any): any => {
-    //Chat id from <cache>
-    let _ChatId: any = Cache.getValue(ctx.chat.id);
+    let { user }: any = Cache.getValue(ctx.chat.id);
 
-    //<_L> stands for language
-    if (_ChatId && _ChatId._L) {
-      if (_ChatId._L == "Amharic") return amharic;
-      else if (_ChatId._L == "Oromic") return oromic;
-      else return english;
-    }
-    //the Default <English>
-    return english;
+    if (user.language == "Amhara") return amharic;
+    else if (user.language == "Oromo") return oromic;
+    else return english;
   };
 
   // static _S(ctx: any) {

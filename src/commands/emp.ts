@@ -1,13 +1,13 @@
 import { Context, Markup } from "telegraf";
 import { InlineKeyboardMarkup } from "telegraf/types";
-import { CustomCallbackQuery } from "../types/types.ts";
+import Language from "../languages/manager.ts";
+import { CustomCallbackQuery } from "../interfaces/types.ts";
 import Keyboard from "../markup/markup.ts";
-import { english } from "../languages/english.ts";
 
 class EMP {
   constructor(private ctx: Context) {}
 
-  private about = english.about;
+  private about = Language.Selector(this.ctx).about;
   private contactUs = "this is contact us section";
   private empSocial =
     "🌐 <b>Medias\n\n" +
