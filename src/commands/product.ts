@@ -5,7 +5,7 @@ import { reg } from "../types/interfaces.ts";
 import { english } from "../languages/english.ts";
 
 class ProductHandler {
-  constructor(private ctx: Context) {}
+  constructor(private ctx: Context) { }
 
   async confirm() {
     const chatId = this.ctx.chat?.id;

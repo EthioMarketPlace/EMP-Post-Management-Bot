@@ -1,10 +1,10 @@
 import { Context } from "telegraf";
 import { CustomCallbackQuery } from "../types/interfaces.ts";
 
-import Cache from "../services/cacheService.js";
-import Keyboard from "../markup/markup.js";
+import Cache from "../services/cacheService.ts";
+import Keyboard from "../markup/markup.ts";
 import DB from "../services/databaseService.ts";
-import retryOperation from "../utils/updatelanguage.js";
+import retryOperation from "../utils/updatelanguage.ts";
 
 class LanguageHandler {
   constructor(private ctx: Context) {}
@@ -12,7 +12,8 @@ class LanguageHandler {
   async showLanguageOptions() {
     const keyboard = Keyboard.languageOptions();
     const id = this.ctx.from?.id;
-    const { user } = Cache.getValue(id!.toString()) as {
+
+    const { user } = (await Cache.getValue(id!.toString())) as {
       user: { language: string };
     };
 
@@ -22,8 +23,8 @@ class LanguageHandler {
     );
   }
 
-  private saveToCache(id: number, language: string) {
-    let getCache = Cache.getValue(id!.toString()) as {
+  private async saveToCache(id: number, language: string) {
+    let getCache = (await Cache.getValue(id!.toString())) as {
       user: { language: string };
     };
 

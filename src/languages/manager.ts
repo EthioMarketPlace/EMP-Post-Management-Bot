@@ -1,8 +1,8 @@
 // import Buttons from "../buttons";
-import { amharic } from "./amharic.js";
-import { oromic } from "./oromic.js";
-import { english } from "./english.js";
-import Cache from "../services/cacheService.js";
+import { amharic } from "./amharic.ts";
+import { oromic } from "./oromic.ts";
+import { english } from "./english.ts";
+import Cache from "../services/cacheService.ts";
 
 class Language {
   static Selector = (chatid: string) => {

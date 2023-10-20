@@ -32,9 +32,31 @@ export interface reg {
 }
 
 export type status = "title" | "description" | "price" | "contact" | "photo";
-
+export type commands = "title" | "description" | "price" | "contact";
+export type sections = "about" | "contactus" | "empsocial";
 export interface BotInterface {
   start(to: string): Promise<void>;
 
   // Add other common methods and properties here
 }
+
+export type EnglishCommands = {
+  latest: (latest: string) => string;
+  myproduct: (products: string) => string;
+  manage: (post_id: string) => string;
+  channel: string;
+  category: string;
+  about: string;
+  contactus: string;
+  language: string;
+  title: string;
+  description: string;
+  price: string;
+  contact: string;
+  photo: string;
+  conf: (data: reg) => string;
+  confG: (data: reg) => string;
+  confC: (data: any) => string;
+  sold: (data: any) => string;
+  // Add other command keys and their types here
+};

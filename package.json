@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.ts",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "clear-jest-cache": "jest --clearCache"
   },
   "keywords": [],
   "author": "",

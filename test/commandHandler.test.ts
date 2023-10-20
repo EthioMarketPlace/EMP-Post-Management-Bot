@@ -1,74 +1,100 @@
-import { Context } from "telegraf";
 import { english } from "../src/languages/english";
 import Keyboard from "../src/markup/markup";
 import CommandHandler from "../src/commands/commandHandler";
-import { CustomTextMessage } from "../src/types/interfaces";
+import { commands } from "../src/types/interfaces";
 import Cache from "../src/services/cacheService";
 import EMPBot from "../src/commands/start";
 
 // Mock the necessary dependencies
 jest.mock("../src/services/cacheService");
+jest.mock("../src/commands/start");
 
 describe("Command Handler", () => {
-  let mockCtx: Context;
-  let commandInstance: CommandHandler;
+  const commandsToTest = ["/title", "/description", "/price", "/contact"];
+  test.each(commandsToTest)(
+    "it should handle the %s command",
+    async (command) => {
+      const mockCtx = {
+        message: {
+          text: command,
+        },
+        replyWithHTML: jest.fn(),
+        chat: {
+          id: 123,
+        },
+      };
 
-  beforeEach(() => {
-    // Create a mock context for testing
-    mockCtx = {
+      const cachedValue = {
+        state: "contact",
+        photo: "somePhoto",
+      };
+
+      Cache.getValue = jest.fn().mockReturnValueOnce(cachedValue);
+      await new CommandHandler(mockCtx as any).handler();
+
+      //test getCached method
+      expect(Cache.getValue).toHaveBeenCalledWith("123_d");
+
+      expect(Cache.saveCache).toHaveBeenCalledWith("123_d", cachedValue, 3600);
+
+      let newCommand = command.slice(1);
+
+      //replyWithHtml only exist if command is "contact"
+      if (newCommand === "contact") {
+        expect(mockCtx.replyWithHTML).toHaveBeenCalledWith(
+          english[newCommand as commands],
+          Keyboard.contact()
+        );
+      } else {
+        expect(mockCtx.replyWithHTML).toHaveBeenCalledWith(
+          english[newCommand as commands]
+        );
+      }
+    }
+  );
+
+  test("handle if there is no cached data", async () => {
+    const mockCtx = {
       message: {
-        text: "/contact", // Replace with your desired command
-      } as CustomTextMessage,
-      chat: {
-        id: 123, // Replace with your desired chat ID
+        text: "/home",
       },
-      replyWithHTML: jest.fn(),
-    } as any;
+      chat: {
+        id: 123,
+      },
+    };
 
-    commandInstance = new CommandHandler(mockCtx);
+    const empbot: EMPBot = new EMPBot(mockCtx as any);
+
+    Cache.getValue = jest.fn().mockReturnValueOnce(null);
+    await new CommandHandler(mockCtx as any, empbot).handler();
+    expect(empbot.start).toHaveBeenCalledWith("start");
   });
 
-  it("should handle all commands correctly", async () => {
-    // Mock the cache value
+  test("test if photo gets deleted, if photo exist along with cached data,", async () => {
+    const mockCtx = {
+      message: {
+        text: "/home",
+      },
+      replyWithHTML: jest.fn(),
+      chat: {
+        id: 123,
+      },
+    };
+
     const cachedValue = {
-      // Replace with your desired cached data
       state: "contact",
       photo: "somePhoto",
     };
+
     Cache.getValue = jest.fn().mockReturnValueOnce(cachedValue);
 
-    // Call the handler method
-    await commandInstance.handler();
+    await new CommandHandler(mockCtx as any).handler();
 
-    // Check if the cache was retrieved
+    //test getCached method
     expect(Cache.getValue).toHaveBeenCalledWith("123_d");
 
-    // Check if the cache was updated correctly
-    expect(Cache.saveCache).toHaveBeenCalledWith(
-      "123_d",
-      {
-        state: "contact",
-      },
-      3600
-    );
+    expect(Cache.saveCache).toHaveBeenCalledWith("123_d", cachedValue, 3600);
 
-    // Check if replyWithHTML was called with the correct parameters
-    expect(mockCtx.replyWithHTML).toHaveBeenCalledWith(
-      english.contact,
-      Keyboard.contact()
-    );
-  });
-
-  it("should call EMPBot start method when returnHome is invoked", () => {
-    // const mockEMPBot: BotInterface = new MockEMPBot();
-    const empBot = new EMPBot(mockCtx);
-
-    const commandInstance = new CommandHandler(mockCtx, empBot);
-
-    const startSpy = jest.spyOn(empBot, "start");
-
-    commandInstance["returnHome"]();
-
-    expect(startSpy).toHaveBeenCalledWith("start");
+    expect(Cache.getValue).toHaveReturnedWith({ state: "home" });
   });
 });

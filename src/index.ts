@@ -57,7 +57,7 @@ bot.action("exploreChannels", (ctx) => {
 });
 
 //about section
-bot.action(["about", "contactUs", "empsocial"], (ctx) => {
+bot.action(["about", "contactus", "empsocial"], (ctx) => {
   const emp = new EMP(ctx);
   emp.display();
 });
@@ -85,9 +85,11 @@ bot.action("cancel", (ctx) => {
   new ProductHandler(ctx).cancel();
 });
 
-bot.command(["home", "title", "description", "price", "contact"], (ctx) => {
+bot.command(["title", "description", "price", "contact"], (ctx) => {
   new CommandHandler(ctx).handler();
 });
+
+bot.command("confirm_all", (ctx) => {});
 
 bot.on("message", (ctx) => {
   new RegHandler(ctx).handler();

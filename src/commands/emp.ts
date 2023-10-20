@@ -6,12 +6,9 @@ import Keyboard from "../markup/markup.ts";
 
 class EMP {
   constructor(private ctx: Context) {}
-
-  private about = Language.Selector(this.ctx.chat?.id.toString() as string)
-    .about;
-  private contactUs = Language.Selector(this.ctx.chat?.id.toString() as string)
-    .contactus;
-
+  private language = Language.Selector(this.ctx.chat?.id.toString() as string);
+  private about = this.language.about;
+  private contactUs = this.language.contactus;
   private empSocial =
     "🌐 <b>Medias\n\n" +
     `👍 <u>facebook :</u>\n https://www.facebook.com/profile.php?id=100087510051959\n\n` +
@@ -29,7 +26,7 @@ class EMP {
     const message =
       cbkQuery?.data === "about"
         ? this.about
-        : cbkQuery?.data === "contactUs"
+        : cbkQuery?.data === "contactus"
         ? this.contactUs
         : this.empSocial;
 

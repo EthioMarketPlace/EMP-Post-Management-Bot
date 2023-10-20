@@ -34,7 +34,6 @@ class CommandHandler {
 
   private returnHome() {
     this.empBot!.start("start");
-    // new EMPBot(this.ctx).start("start");
   }
 }
 

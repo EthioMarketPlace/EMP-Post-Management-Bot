@@ -1,49 +1,44 @@
-import { Context } from "telegraf";
-
 import EMP from "../src/commands/emp";
-import { CustomCallbackQuery } from "../src/types/interfaces";
+import { english } from "../src/languages/english";
 import Keyboard from "../src/markup/markup";
+import Language from "../src/languages/manager";
+import { EnglishCommands, sections } from "../src/types/interfaces";
+
+jest.mock("../src/languages/manager");
 
 describe("EMP", () => {
-  let empInstance: EMP;
-  let mockCtx: Context;
-
-  beforeEach(() => {
-    // Mock the telegraf Context and other dependencies as needed
-    mockCtx = {
-      // Implement necessary methods and properties here
-      callbackQuery: {
-        data: "about", // Set the data property to "about" for testing
-      } as CustomCallbackQuery,
+  const dataList = ["about", "contactus", "empsocial"];
+  test.each(dataList)("should display %s section correctly", async (data) => {
+    const ctx = {
       editMessageText: jest.fn(),
-    } as any;
+      chat: {
+        id: "123",
+      },
+      callbackQuery: {
+        data: data,
+      },
+    };
 
-    // Create an instance of the EMP class with the mock context
-    empInstance = new EMP(mockCtx);
+    Language.Selector = jest.fn().mockReturnValueOnce(english);
+
+    const Emp = new EMP(ctx as any);
+    await Emp.display();
+
+    const empSocial =
+      "🌐 <b>Medias\n\n" +
+      `👍 <u>facebook :</u>\n https://www.facebook.com/profile.php?id=100087510051959\n\n` +
+      `📷 <u>Instagram :</u> https://www.instagram.com/ethio_market_place/</b>`;
+
+    let result = "";
+
+    const newData =
+      data === "about" || data === "contactus"
+        ? (result = english[data])
+        : (result = empSocial);
+
+    expect(ctx.editMessageText).toHaveBeenCalledWith(result, {
+      parse_mode: "HTML",
+      reply_markup: Keyboard.redirectToHome().reply_markup,
+    });
   });
-
-  afterEach(() => {
-    // Clear mock function calls after each test
-    jest.clearAllMocks();
-  });
-
-  it("should send about section correctly", async () => {
-    debugger;
-    // Call the display method
-    await empInstance.display();
-
-    // Define the expected keyboard
-    const expectedKeyboard = Keyboard.redirectToHome().reply_markup;
-
-    // Check if editMessageText was called with the expected parameters
-    expect(mockCtx.editMessageText).toHaveBeenCalledWith(
-      empInstance["about"],
-      expect.objectContaining({
-        parse_mode: "HTML",
-        reply_markup: expectedKeyboard,
-      })
-    );
-  });
-
-  // Add more test cases for other scenarios if needed
 });

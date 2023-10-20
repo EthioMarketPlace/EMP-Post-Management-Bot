@@ -1,7 +1,10 @@
 import User from "../models/user.ts";
 
 class DB {
-  static async changeLanguage(id: number, language: string): Promise<any> {
+  static async changeLanguage(
+    id: number | string,
+    language: string
+  ): Promise<any> {
     const user = await User.findOneAndUpdate(
       { id: id },
       { language: language },
