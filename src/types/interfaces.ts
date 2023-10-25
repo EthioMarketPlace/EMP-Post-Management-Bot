@@ -28,7 +28,7 @@ export interface reg {
   contact: string;
   photo?: string;
   category: string;
-  id: number;
+  id: number | string;
 }
 
 export type status = "title" | "description" | "price" | "contact" | "photo";

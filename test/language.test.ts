@@ -55,6 +55,6 @@ describe("Language Handler", () => {
       }
     );
 
-    expect(DB.changeLanguage).toBeCalled();
+    expect(DB.changeLanguage).toBeCalledWith("123", "English");
   });
 });

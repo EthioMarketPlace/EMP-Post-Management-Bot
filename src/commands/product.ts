@@ -5,7 +5,7 @@ import { reg } from "../types/interfaces.ts";
 import { english } from "../languages/english.ts";
 
 class ProductHandler {
-  constructor(private ctx: Context) { }
+  constructor(private ctx: Context, private empBot?: EMPBot) {}
 
   async confirm() {
     const chatId = this.ctx.chat?.id;
@@ -14,7 +14,6 @@ class ProductHandler {
       return console.log("chat_id not found");
     }
     const cached = Cache.getValue(chatId + "_d") as reg;
-
     if (!cached) {
       return console.log("cache not found");
     }
@@ -22,13 +21,13 @@ class ProductHandler {
     //adding user id to cache object
     cached.id = chatId;
 
-    let pendingPosts = [];
+    let pendingPosts: any[] = [];
     const pendingCaches = Cache.getValue("pending") as [];
     if (pendingCaches) {
       pendingPosts = pendingCaches;
     }
-
-    Cache.saveCache("pending", pendingPosts.push(cached), 0);
+    pendingPosts.push(cached);
+    Cache.saveCache("pending", pendingPosts, 0);
 
     if (cached.photo)
       //forward message to admin group
@@ -43,10 +42,8 @@ class ProductHandler {
   }
 
   async cancel() {
-    //delete message
-    //go home
     await this.ctx.deleteMessage(this.ctx.message?.message_id);
-    await new EMPBot(this.ctx).start("start");
+    this.empBot?.start("start");
   }
 }
 
